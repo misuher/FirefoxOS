@@ -1,0 +1,14 @@
+{
+	"version": "0.1",
+	"name": "Geolocate",
+	"launch_path": "/host/0By2JhEMRcd-sWjFfV0ZDNy1WTlk/10.html",
+	"default_locale": "es",
+	"developer": {
+		"name": "Pepito",
+		"phone": "123456789"
+	},
+	"permissions":{
+		"geolocation": { "description": "Required to show your current location." },
+		"storage": { "description": "Improves performance by caching some data locally." }
+	}
+}

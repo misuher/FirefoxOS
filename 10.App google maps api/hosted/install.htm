@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Geolocate install</title>
+<meta charset="UTF-8">
+<script type="text/javascript" src="http://zeptojs.com/zepto.min.js" ></script>
+</head>
+
+<body>
+
+<div id="install">Estado de la instalación de Geolocate 0.1</div>
+
+<script>
+    $(document).ready(function() {
+      var gManifestName = location.href.replace("install.htm","") + 'manifest.webapp';
+      var request = navigator.mozApps.checkInstalled(gManifestName);
+
+      request.onsuccess = function() {
+        if (request.result) {
+          $("#install").text("La app Geolocate ya esta instalada");
+        } else {
+          $("#install").html("<input type='button' value='Instalar'>");
+
+          $("#install").click(function() {
+              var req = navigator.mozApps.install(gManifestName);
+              req.onsuccess = function(data) {
+                  $("#install").text("La app Geolocate ha sido instalada").unbind('click');
+              }
+              req.onerror = function(errObj) {
+                  alert("Error al instalar: " + this.error.name);
+              }
+          });
+        }
+      }
+
+      request.onerror = function() {
+        alert("Error de instlación: "+this.error.message);}
+    });
+</script>
+
+
+</body>
+
+</html>

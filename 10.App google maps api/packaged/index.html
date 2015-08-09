@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intalador de package Geolocate</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<p>Página de instalación de Geolocate por package</p>
+	<script type="text/javascript">
+		(function(){
+			var manifestUrl = location.href.replace("index.html", "") + 'package.manifest';
+
+			if (!navigator.mozApps.installPackage){
+				alert("Error: esta aplicación no es compatible con tu dispositivo");
+				return;
+			}
+
+			var req = navigator.mozApps.installPackage(manifestUrl);
+			req.onsuccess = function(){
+				alert('Instalación completada '+this.result.origin);
+			};
+			req.onerror = function(){
+				alert('Instalación no completada con el error '+this.error.name);
+			};
+		})();
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+body {
+	margin: 10%;
+
+}
+
+h1 {
+	font-variant: small-caps;
+	margin-bottom: 40px;
+	text-align: center;
+	text-decoration: underline;
+}
+
+h2,h3 {
+	font-variant: small-caps;
+}
+
+p {
+	text-align: justify;
+}
+
+ul li{
+	margin: 0;
+	padding: 0;
+}
+
+#piezas {
+	margin-left: 2em;
+}
+
+#maniobras {
+	margin-left: 3em;
+}
+
+#maniobras h3 {
+	font-size: 1.1em;
+}
+
+.pieza {
+	font-family: Helvetica, Verdana, "Times New Roman";
+	font-size: 0.9em;
+	font-weight: 800;
+}
+
+.rojo {
+	color: red;
+}
+
+.azul {
+	color: blue;
+}

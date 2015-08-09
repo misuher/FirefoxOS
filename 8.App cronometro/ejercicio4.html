@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cronómetro</title>
+	<script type="text/javascript" src="zepto.min.js"></script>
+	<script type="text/javascript" src="touch.js"></script>
+	<script type="text/javascript">
+	//NOTA: el programa es tan corto que no voy a dividirlo en ficheros, así estará más a mano todo para su revisión
+		$(function(){
+			//bloque de variables
+			var crono = $("#crono");
+			var marcas = $("#marcas");
+			var temp = false;
+			var pantalla = document.screen;
+			localStorage.tiempo = (localStorage.tiempo || '0.00');
+			localStorage.marca = (localStorage.marca || '');
+
+			//inicialiazadores
+			crono.html((+localStorage.tiempo).toFixed(2));
+			$('h2').hide();
+
+			//bloque de funciones
+			function incrementar(){
+				localStorage.tiempo = +localStorage.tiempo + 0.01;
+			}
+
+			function render(){
+				crono.html( (+localStorage.tiempo).toFixed(2) );
+			}
+
+			function renderMarcas(){
+				localStorage.marca += "<li>"+ (+localStorage.tiempo).toFixed(2) +"</li>";
+				marcas.html(localStorage.marca);
+			}
+
+			function goArrancar(){
+				temp = setInterval(function(){incrementar();render();}, 10);
+			}
+
+			function goParar(){
+				clearInterval(temp);
+				temp = false;
+			}
+
+			function go() {
+				if (temp){
+					goParar();
+					$('h2').show();
+					renderMarcas();
+				}else{
+					goArrancar();
+				}
+			}
+
+			function reset(){
+				localStorage.tiempo = '0.00';
+				render();
+				localStorage.marca = '';
+				marcas.html(' ');
+				$('h2').hide();
+			}
+
+			//bloque de event listeners
+			$('#botonGo').on('click', go);
+			$('body').on('swipeRight', go);
+			$('#botonReset').on('click', reset);
+			$('body').on('swipeLeft', reset);
+		});
+	</script>
+	<style>
+		#wrapper{width: 200px; margin:0 auto; }
+		h1{text-align: center; }
+		#crono{text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 30px; }
+		#botonGo{float:left; }
+		#botonReset{float:right; }
+		#marcas{clear: both; }
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<h1>Cronómetro</h1>
+		<div id="crono"></div>
+		<button type="button" id="botonGo">Comenzar/Parar</button>
+		<button type="button" id="botonReset">Reset</button>
+		<div>
+			<h2>Marcas:</h2>
+			<ol id="marcas"></ol>
+		</div>
+	</div>
+</body>
+</html>

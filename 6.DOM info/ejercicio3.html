@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ejercicio3</title>
+</head>
+<body>
+	<h1>Propiedades del objeto DOM location:</h1>
+	<table id="tab"></table>
+	<script>
+		var tabla = document.getElementById("tab");
+		var i = 0;
+
+		for (i in window.location){
+			if (typeof(window.location[i]) === 'string'){
+				tabla.innerHTML += "<tr> <td>"+i+ "</td> <td> = "+window.location[i]+ "</td> </tr>";
+			}else{
+				tabla.innerHTML += "<tr> <td>"+i+ "</td> <td> = no es imprimible </td> </tr>";
+			}
+		}
+	</script>
+</body>
+</html>
